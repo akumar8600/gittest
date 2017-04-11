@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        git(url: 'https://github.com/akumar8600/gittest.git', branch: 'master')
+        svn(url: 'http://svn-azure.livecareer.com/svn/configurations/trunk/livecareer/trunk', poll: true)
       }
     }
   }
