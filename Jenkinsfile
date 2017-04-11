@@ -3,17 +3,49 @@ pipeline {
   stages {
     stage('DEV') {
       steps {
-        echo 'hello world'
+        parallel(
+          "DEV": {
+            echo 'hello world'
+            
+          },
+          "Auto-Test": {
+            sleep 10
+            
+          }
+        )
       }
     }
     stage('REG') {
       steps {
-        sleep 5
+        parallel(
+          "REG": {
+            sleep 5
+            
+          },
+          "Auto-Reg": {
+            echo 'test Automation'
+            
+          }
+        )
       }
     }
     stage('STG') {
       steps {
-        build 'Build_Package_TEST'
+        parallel(
+          "STG": {
+            build 'Build_Package_TEST'
+            
+          },
+          "Auto-STG": {
+            sleep 10
+            
+          }
+        )
+      }
+    }
+    stage('Prod') {
+      steps {
+        echo 'Deployed'
       }
     }
   }
