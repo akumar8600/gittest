@@ -1,9 +1,19 @@
 pipeline {
   agent none
   stages {
-    stage('Checkout Code') {
+    stage('DEV') {
       steps {
-        svn(url: 'http://svn-azure.livecareer.com/svn/configurations/trunk/livecareer/trunk', poll: true)
+        echo 'hello world'
+      }
+    }
+    stage('REG') {
+      steps {
+        sleep 5
+      }
+    }
+    stage('STG') {
+      steps {
+        build 'Build_Package_TEST'
       }
     }
   }
